@@ -10,7 +10,7 @@ I have this thought for serveral reasons:
 2. The code and data on chain will remain as long as the chain lives, which means even the project is not maintained anymore the application will not lost. So for developers, web3 projects may cheaper to be maintained. And for users who view their data as important assets, it is a good place to hold their data.
 3. The code behind web3 applications is transparent. It means everyone knows how their data can be handled and all history of operations happened to the data. There is no cheating. So it can reduce cost of things that are heavily dependent on trust.
 
-When we talk about users need something, it doesn't merely mean they have problems unsolved. One of advantage of market economy is that if people both know their needs and able to satisfy it, they already would be.[1]So if I plan to start a project, it should either find a better way to satisfy existing needs or satisfy new needs. Most importantly, it is something I really love to use.
+When we talk about users need something, it doesn't merely mean they have problems unsolved. One of advantage of market economy is that if people both know their needs and able to satisfy it, they already would be.[1]So if I plan to start a project, it should either find a better way to satisfy existing needs or satisfy new needs. Most importantly, it is something users really love to use.
 
 
 
