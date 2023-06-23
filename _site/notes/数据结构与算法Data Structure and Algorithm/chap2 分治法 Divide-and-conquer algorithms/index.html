@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>分治法 Divide-and-conquer algorithms | maksir98’s blog</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="分治法 Divide-and-conquer algorithms" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/notes/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95Data%20Structure%20and%20Algorithm/chap2%20%E5%88%86%E6%B2%BB%E6%B3%95%20Divide-and-conquer%20algorithms/" />
+<meta property="og:url" content="http://localhost:4000/notes/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95Data%20Structure%20and%20Algorithm/chap2%20%E5%88%86%E6%B2%BB%E6%B3%95%20Divide-and-conquer%20algorithms/" />
+<meta property="og:site_name" content="maksir98’s blog" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="分治法 Divide-and-conquer algorithms" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"分治法 Divide-and-conquer algorithms","url":"http://localhost:4000/notes/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95Data%20Structure%20and%20Algorithm/chap2%20%E5%88%86%E6%B2%BB%E6%B3%95%20Divide-and-conquer%20algorithms/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name">分治法 Divide-and-conquer algorithms</h1>
+      <h2 class="project-tagline"></h2>
+      
+      
+    </header>
+
+    <main id="content" class="main-content" role="main">
+      <p>当我们要设计一套算法去解决问题时，会有一些常见的算法策略帮助我们设计思路，比如贪心算法、分治法、动态规划等。在实际应用中，我们会根据问题场景的特点来选择不同的策略。这篇文章将会讲解分治法，当问题可以分解为多个相互独立的小问题时，我们可以使用这个策略。</p>
+
+<p>通常分治法会通过以下3个步骤来解决问题：</p>
+<ol>
+  <li>将问题分解成与原问题类型相似、相互独立的子问题，子问题又可以通过相同的方式分解成更小的子问题。通过递归的方式，将问题分解到足够小，小到每个子问题可以直接求解。</li>
+  <li>解决每个子问题。</li>
+  <li>将子问题的解合并成父问题的解，接着再进一步合并到最大问题的解。</li>
+</ol>
+
+<p>使用分治法思想最典型的例子之一就是归并排序（merge sort）.</p>
+
+<h2 id="分治法与时间复杂度">分治法与时间复杂度</h2>
+
+<p><strong>分治法最关键的步骤就是上述的第一步，这个步骤设计得好，算法的时间复杂度会有大的优化</strong>。我们通过下面这个例子感受分治法和时间复杂度的关系。</p>
+
+<h3 id="整数相乘">整数相乘</h3>
+
+<p>在这个例子里，我们的目标是计算2个n位整数相乘的结果。当n比较大的时候，一般计算机的CPU是难以通过1个指令直接计算出结果的，因此我们需要将大的整数相乘分为若干个小的整数相乘，而小的整数相乘又可以进一步分为若干个更小的整数相乘，直到CPU可以直接计算为止。最后我们将若干个小的整数相乘的计算结果进行结合，就能获取到最后想要的结果。</p>
+
+<p>具体步骤如下。</p>
+
+<p>假设我们有两个输入分别是x和y，它们都是n位的整数。首先我们会将每个整数分为左右两半，分别以下标L和下标R表示。这样x和y可以以下面这个公式表示（为了方便计算，我们假设n为2的幂，也就是说$2^x = n$）：</p>
+
+\[\begin{align}
+  x = 2^{n/2}x_L + x_R \\ y = 2^{n/2}y_L + y_R
+\end{align}\]
+
+<p>假设 \(x=10110110_2\)（下标2表示这个数是以二进制表示），那么$x_L=1011_2$，$x_R=0110_2$。</p>
+
+<p>那么x和y相乘可以被描述为</p>
+
+\[\begin{align}
+  xy &amp;= (2^{n/2}x_L + x_R)(2^{n/2}y_L + y_R)
+  \\ &amp;= 2^nx_Ly_L + 2^{n/2}(x_Ly_R + x_Ry_L) + x_Ry_R
+\end{align}\]
+
+<p>在这个公式里，我们可以看到分治法的思想。我们把n位整数相乘$xy$<strong>分解为4个n/2位整数相乘</strong>，分别是\(x_Ly_L\)、\(x_Ly_R\)、\(x_Ry_L\)和\(x_Ry_R\)。我们可以将这4个相乘以同样的方式继续分解下去，直到计算机能够轻易计算为止。这就是上述分治法的第一步：</p>
+
+<blockquote>
+  <ol>
+    <li>将问题分解成类型与原问题相似、相互独立的子问题，子问题又可以通过相同的方式分解成更小的子问题。通过递归的方式，将问题分解到足够小，小到每个子问题可以直接求解。</li>
+  </ol>
+</blockquote>
+
+<p>当我们计算完4个n/2位整数相乘的结果后，我们要做的就是合并这些结果。从公式中我们可以知道，这一过程主要有两个步骤。第1步是将结果乘以\(2^n\)或者\(2^{n/2}\)，实际上就是让2进制数往右移\(n\)位或\({n/2}\)位，很容易解决。第2步就是将结果进行相加。总的来说，合并过程的时间复杂度约为\(Cn\)，其中\(C\)为常量。这就是上述分治法度第三步：</p>
+
+<blockquote>
+  <ol>
+    <li>将子问题的解合并成父问题的解，接着再进一步合并到最大问题的解。</li>
+  </ol>
+</blockquote>
+
+<p>我们将上述计算2个n位整数相乘过程的时间复杂度表示为$T(n)$，那么我们得到</p>
+
+\[\begin{align}
+  T(n) &amp;= 4T(n/2) + Cn
+  \\ T(1) &amp;= 1
+\end{align}\]
+
+<p>假设我们将子问题递归到\(n=1\)为止，那么整个递归过程如下：
+<img src="./dvc.png" /></p>
+
+<p>因此我们可以得到</p>
+
+\[\begin{align}
+T(n)  &amp;= 4^0 \times Cn + 4^1 \times Cn/2 + 4^3 \times Cn/4 + ... + 4^h \times Cn/2^h 
+\\ &amp;= Cn[4^0/2^0 + 4^1/2^1 + 4^2/2^2 + ... + 4^h/2^h]
+\\ &amp;= Cn[2^0 + 2^1 + 2^2 + ... + 2^h]
+\\ &amp;= Cn[2^{h+1} - 1]
+\\ &amp;= Cn[2n - 1]
+\\ &amp;= O(n^2)
+\end{align}\]
+
+<p>总的时间复杂度为\(O(n^2)\).</p>
+
+<h3 id="优化整数相乘">优化整数相乘</h3>
+<p>上述算法的时间复杂度是\(O(n^2)\)，其实还可以进一步优化，那如何优化呢？上文已经提到过，分治法最关键的一步就是第一步：</p>
+<blockquote>
+  <ol>
+    <li>将问题分解成与原问题类型相似、相互独立的子问题，子问题又可以通过相同的方式分解成更小的子问题。通过递归的方式，将问题分解到足够小，小到每个子问题可以直接求解。</li>
+  </ol>
+</blockquote>
+
+<p>下方公式就代表着上述分治法的第1步，我们可以尝试优化这个公式，以降低算法的时间复杂度。</p>
+<blockquote>
+\[xy = (2^{n/2}x_L + x_R)(2^{n/2}y_L + y_R) = 2^nx_Ly_L + 2^{n/2}(x_Ly_R + x_Ry_L) + x_Ry_R\]
+</blockquote>
+
+<p>数学家<a href="https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss">高斯</a>曾发现两个虚数相乘的计算过程</p>
+
+\[(a+bi)(c+di)=ac-bd+(bc+ad)i\]
+
+<p>看起来需要进行4次乘法运算（\(ac\)、\(bd\)、\(bc\)和\(ad\)），但其实只需3次就行，因为</p>
+
+\[bc+ad=(a+b)(c+d)-ac-bd\]
+
+<p>这3次乘法运算分别是\((a+b)(c+d)\)、\(ac\)和\(bd\)。</p>
+
+<p>因此将这个发现结合上述整数相乘的公式，我们可以把公式优化为</p>
+
+\[\begin{align}
+xy &amp;= (2^{n/2}x_L + x_R)(2^{n/2}y_L + y_R) 
+\\ &amp;= 2^nx_Ly_L + 2^{n/2}(x_Ly_R + x_Ry_L) + x_Ry_R
+\\ &amp;= 2^nx_Ly_L + 2^{n/2}[(x_R + x_L)(y_R + y_L) - x_Ry_R - x_Ly_L] + x_Ry_R
+\end{align}\]
+
+<p>通过这个公式，我们把n位整数相乘从上述的分解为4个n/2位整数相乘<strong>优化到为3个</strong>，分别是\(x_Ly_L\)、\(x_Ry_R\)和\((x_R + x_L)(y_R + y_L)\)。
+从而时间复杂度为</p>
+
+\[\begin{align}
+T(n) &amp;= 3T(n/2) + Cn
+  \\ &amp;= O(n^{1.59})
+\end{align}\]
+
+<p>可以看到我们把时间复杂度从\(O(n^2)\)优化到\(O(n^1.59)\)</p>
+
+<h2 id="主定理-master-theorem">主定理 Master Theorem</h2>
+
+<h2 id="分治法的其他应用">分治法的其他应用</h2>
+
+
+      <footer class="site-footer">
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </main>
+  </body>
+</html>
