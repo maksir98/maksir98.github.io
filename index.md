@@ -1,5 +1,6 @@
 ---
 layout: default
+title: maksir98.github.io
 ---
 
 # About Me
