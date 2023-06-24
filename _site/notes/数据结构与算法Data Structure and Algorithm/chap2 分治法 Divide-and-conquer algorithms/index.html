@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
 
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>分治法 Divide-and-conquer algorithms | maksir98’s blog</title>
+<title>分治法(Divide-and-conquer) | maksir98’s blog</title>
 <meta name="generator" content="Jekyll v4.3.2" />
-<meta property="og:title" content="分治法 Divide-and-conquer algorithms" />
+<meta property="og:title" content="分治法(Divide-and-conquer)" />
 <meta property="og:locale" content="en_US" />
 <link rel="canonical" href="http://localhost:4000/notes/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95Data%20Structure%20and%20Algorithm/chap2%20%E5%88%86%E6%B2%BB%E6%B3%95%20Divide-and-conquer%20algorithms/" />
 <meta property="og:url" content="http://localhost:4000/notes/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95Data%20Structure%20and%20Algorithm/chap2%20%E5%88%86%E6%B2%BB%E6%B3%95%20Divide-and-conquer%20algorithms/" />
 <meta property="og:site_name" content="maksir98’s blog" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="分治法 Divide-and-conquer algorithms" />
+<meta property="twitter:title" content="分治法(Divide-and-conquer)" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","headline":"分治法 Divide-and-conquer algorithms","url":"http://localhost:4000/notes/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95Data%20Structure%20and%20Algorithm/chap2%20%E5%88%86%E6%B2%BB%E6%B3%95%20Divide-and-conquer%20algorithms/"}</script>
+{"@context":"https://schema.org","@type":"WebPage","headline":"分治法(Divide-and-conquer)","url":"http://localhost:4000/notes/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95Data%20Structure%20and%20Algorithm/chap2%20%E5%88%86%E6%B2%BB%E6%B3%95%20Divide-and-conquer%20algorithms/"}</script>
 <!-- End Jekyll SEO tag -->
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -43,7 +43,7 @@
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
     <header class="page-header" role="banner">
-      <h1 class="project-name">分治法 Divide-and-conquer algorithms</h1>
+      <h1 class="project-name">分治法(Divide-and-conquer)</h1>
       <h2 class="project-tagline"></h2>
       
       
@@ -71,13 +71,13 @@
 
 <p>具体步骤如下。</p>
 
-<p>假设我们有两个输入分别是x和y，它们都是n位的整数。首先我们会将每个整数分为左右两半，分别以下标L和下标R表示。这样x和y可以以下面这个公式表示（为了方便计算，我们假设n为2的幂，也就是说$2^x = n$）：</p>
+<p>假设我们有两个输入分别是x和y，它们都是n位的整数。首先我们会将每个整数分为左右两半，分别以下标L和下标R表示。这样x和y可以以下面这个公式表示（为了方便计算，我们假设n为2的幂，也就是说\(2^x = n\)）：</p>
 
 \[\begin{align}
   x = 2^{n/2}x_L + x_R \\ y = 2^{n/2}y_L + y_R
 \end{align}\]
 
-<p>假设 \(x=10110110_2\)（下标2表示这个数是以二进制表示），那么$x_L=1011_2$，$x_R=0110_2$。</p>
+<p>假设 \(x=10110110_2\)（下标2表示这个数是以二进制表示），那么\(x_L=1011_2\)，\(x_R=0110_2\)。</p>
 
 <p>那么x和y相乘可以被描述为</p>
 
@@ -86,7 +86,7 @@
   \\ &amp;= 2^nx_Ly_L + 2^{n/2}(x_Ly_R + x_Ry_L) + x_Ry_R
 \end{align}\]
 
-<p>在这个公式里，我们可以看到分治法的思想。我们把n位整数相乘$xy$<strong>分解为4个n/2位整数相乘</strong>，分别是\(x_Ly_L\)、\(x_Ly_R\)、\(x_Ry_L\)和\(x_Ry_R\)。我们可以将这4个相乘以同样的方式继续分解下去，直到计算机能够轻易计算为止。这就是上述分治法的第一步：</p>
+<p>在这个公式里，我们可以看到分治法的思想。我们把n位整数相乘\(xy\)<strong>分解为4个n/2位整数相乘</strong>，分别是\(x_Ly_L\)、\(x_Ly_R\)、\(x_Ry_L\)和\(x_Ry_R\)。我们可以将这4个相乘以同样的方式继续分解下去，直到计算机能够轻易计算为止。这就是上述分治法的第一步：</p>
 
 <blockquote>
   <ol>
@@ -102,7 +102,7 @@
   </ol>
 </blockquote>
 
-<p>我们将上述计算2个n位整数相乘过程的时间复杂度表示为$T(n)$，那么我们得到</p>
+<p>我们将上述计算2个n位整数相乘过程的时间复杂度表示为\(T(n)\)，那么我们得到</p>
 
 \[\begin{align}
   T(n) &amp;= 4T(n/2) + Cn
@@ -164,11 +164,51 @@ T(n) &amp;= 3T(n/2) + Cn
   \\ &amp;= O(n^{1.59})
 \end{align}\]
 
-<p>可以看到我们把时间复杂度从\(O(n^2)\)优化到\(O(n^1.59)\)</p>
+<p>可以看到我们把时间复杂度从\(O(n^2)\)优化到\(O(n^{1.59})\)。</p>
 
 <h2 id="主定理-master-theorem">主定理 Master Theorem</h2>
 
+<p>我们使用分治法去解决一个算法问题时，假设每个问题可以分解为\(a\)个子问题，并且父问题入参大小为\(n\)子问题入参大小为\(n/b\)，合并子问题需要的时间复杂度为\(O(n^d)\)，如下图：
+<img src="./dvc-general.png" />
+那么算法的时间复杂度可以用以下公式表示</p>
+
+\[\begin{align}
+  T(n) = aT(n/b) + O(n^d) (a&gt;0, b&gt;1, d \geq 0)
+\end{align}\]
+
+<p>这时我们可以直接利用<em>主定理(Master theorem)</em>来直接计算算法的时间复杂度。</p>
+
+<dl>
+  <dt>主定理</dt>
+  <dd>如果\(T(n) = aT(n/b) + O(n^d)\), 其中\(a&gt;0, b&gt;1, d \geq 0\)，那么</dd>
+</dl>
+
+\[T(n) =
+  \begin{cases}
+     O(n^d) &amp;(d &gt; log_{b}a)
+  \\ O(n^dlogn) &amp;(d = log_{b}a)
+  \\ O(n^{log_ba}) &amp;(d &lt; log_{b}a)
+  \end{cases}\]
+
+<p>例如上述整数相乘，我们有</p>
+<blockquote>
+  <p>\(T(n) = 3T(n/2) + Cn\)
+那么\(a=3,b=2,d=1\)，带入公式可得\(d &lt; log_{b}a\)，我们可以得到</p>
+</blockquote>
+
+\[\begin{align}
+T(n) &amp;= O(n^{log_ba})
+  \\ &amp;= O(n^{log_{2}3})
+  \\ &amp;\approx O(n^{1.58})
+\end{align}\]
+
 <h2 id="分治法的其他应用">分治法的其他应用</h2>
+<ul>
+  <li>merge sort</li>
+  <li>找中位数</li>
+  <li>矩阵乘法</li>
+  <li>快速傅立叶变换</li>
+</ul>
 
 
       <footer class="site-footer">
